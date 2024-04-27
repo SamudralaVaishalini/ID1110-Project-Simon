@@ -1,6 +1,5 @@
 import pygame
 import random
-
 # COLORS (r, g, b)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -31,11 +30,9 @@ class Button:
     def __init__(self, x, y, colour):
         self.x, self.y = x, y  # Set the position of the button
         self.colour = colour    # Set the color of the button
-
     # Draw the button on the screen
     def draw(self, screen):
         pygame.draw.rect(screen, self.colour, (self.x, self.y, BUTTON_SIZE, BUTTON_SIZE))
-
     # Check if the button is clicked
     def clicked(self, mouse_x, mouse_y):
         return self.x <= mouse_x <= self.x + BUTTON_SIZE and self.y <= mouse_y <= self.y + BUTTON_SIZE
@@ -46,7 +43,6 @@ class UIElement:
     def __init__(self, x, y, text):
         self.x, self.y = x, y  # Set the position of the UI element
         self.text = text        # Set the text content of the UI element
-
     # Draw the UI element on the screen
     def draw(self, screen):
         font = pygame.font.Font("moto-verse.ttf", 16)  # Load a font for rendering text
