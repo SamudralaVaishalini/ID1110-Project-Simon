@@ -87,7 +87,7 @@ class Game:
     # Save the high score to a file
     def save_score(self):
         with open("high_score.txt", "w") as file:
-            if self.score > self.high_score:
+            if self.score > self.high_score :
                 # If current score is higher than high score, write current score to file
                 file.write(str(self.score))
 
