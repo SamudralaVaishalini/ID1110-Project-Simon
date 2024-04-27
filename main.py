@@ -107,3 +107,11 @@ class Game:
         self.score = 0
         # Get the high score
         self.high_score = self.get_high_score()
+      # Display "Game Over" text on the screen
+    def game_over_text(self):
+        # Load font for "Game Over" text
+        over_font = pygame.font.Font('INFECTED.ttf', 150)
+        # Render "Game Over" text
+        over_text = over_font.render('GAME OVER', True, (0, 0, 0))
+        # Draw "Game Over" text on the screen
+        self.screen.blit(over_text, (80, 200))
