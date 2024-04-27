@@ -198,7 +198,7 @@ class Game:
                 self.clock.tick(FPS)
         # After the animation is complete, restore the original screen
         self.screen.blit(original_surface, (0, 0))
-     # Animate the screen flash when game over
+    # Animate the screen flash when game over
     def game_over_animation(self):
         # Copy the original screen to avoid modifying it directly
         original_surface = self.screen.copy()
@@ -238,3 +238,34 @@ class Game:
         # Update the display
         pygame.display.update()
 
+# Handle events such as mouse clicks and quitting the game
+    def events(self):
+        # Loop through all events
+        for event in pygame.event.get():
+            # If the quit event is triggered
+            if event.type == pygame.QUIT:
+                # Quit the pygame module
+                pygame.quit()
+                # Exit the script
+                quit(0)
+            # If a mouse button is pressed
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # Get the position of the mouse click
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                # Loop through all buttons
+                for button in self.buttons:
+                    # If the clicked position is within the button's area
+                    if button.clicked(mouse_x, mouse_y):
+                        # Set the clicked_button attribute to the color of the clicked button
+                        self.clicked_button = button.colour
+
+# Initialize the game
+game = Game()
+
+# Main game loop
+while True:
+
+    # Start a new game
+    game.new()
+    # Run the game
+    game.run()
