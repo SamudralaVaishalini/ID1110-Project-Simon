@@ -198,4 +198,43 @@ class Game:
                 self.clock.tick(FPS)
         # After the animation is complete, restore the original screen
         self.screen.blit(original_surface, (0, 0))
+     # Animate the screen flash when game over
+    def game_over_animation(self):
+        # Copy the original screen to avoid modifying it directly
+        original_surface = self.screen.copy()
+        # Create a surface for the flash effect with transparency
+        flash_surface = pygame.Surface((self.screen.get_size()))
+        flash_surface = flash_surface.convert_alpha()
+
+        r, g, b = WHITE
+        # Loop through the animation steps for flashing effect
+        for _ in range(3):
+            for start, end, step in ((0, 255, 1), (255, 0, -1)):
+                # Loop through alpha values within the range with the given step
+                for alpha in range(start, end, ANIMATION_SPEED * step):
+                    # Copy the original screen to reset it for the next frame
+                    self.screen.blit(original_surface, (0, 0))
+                    # Fill the flash surface with white color and current alpha
+                    flash_surface.fill((r, g, b, alpha))
+                    # Blit the flash surface onto the screen
+                    self.screen.blit(flash_surface, (0, 0))
+                    # Update the display to show the changes
+                    pygame.display.update()
+                    # Control the frame rate
+                    self.clock.tick(FPS)
+
+    # Draw elements on the screen
+    def draw(self):
+        # Fill the screen with white color
+        self.screen.fill((255, 255, 255))
+        # Draw background image
+        self.screen.blit(BGCOLOR, (0, 0))
+        # Draw score and high score text on the screen
+        UIElement(170, 20, f"Score: {str(self.score)}").draw(self.screen)
+        UIElement(370, 20, f"High score: {str(self.high_score)}").draw(self.screen)
+        # Draw buttons on the screen
+        for button in self.buttons:
+            button.draw(self.screen)
+        # Update the display
+        pygame.display.update()
 
