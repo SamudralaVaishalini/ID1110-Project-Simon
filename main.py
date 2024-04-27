@@ -97,3 +97,13 @@ class Game:
             else:
                 # Otherwise, write high score to file
                 file.write(str(self.high_score))
+                
+    # Reset game variables for a new game
+    def new(self):
+        # Initialize game variables
+        self.waiting_input = False
+        self.pattern = []
+        self.current_step = 0
+        self.score = 0
+        # Get the high score
+        self.high_score = self.get_high_score()
