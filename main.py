@@ -196,7 +196,7 @@ class Game:
                 pygame.display.update()
                 # Control the frame rate
                 self.clock.tick(FPS)
-        # After the animation is complete, restore the original screen
+    # After the animation is complete, restore the original screen
         self.screen.blit(original_surface, (0, 0))
     # Animate the screen flash when game over
     def game_over_animation(self):
@@ -212,36 +212,36 @@ class Game:
             for start, end, step in ((0, 255, 1), (255, 0, -1)):
                 # Loop through alpha values within the range with the given step
                 for alpha in range(start, end, ANIMATION_SPEED * step):
-                    # Copy the original screen to reset it for the next frame
+                # Copy the original screen to reset it for the next frame
                     self.screen.blit(original_surface, (0, 0))
-                    # Fill the flash surface with white color and current alpha
+                # Fill the flash surface with white color and current alpha
                     flash_surface.fill((r, g, b, alpha))
-                    # Blit the flash surface onto the screen
+                 # Blit the flash surface onto the screen
                     self.screen.blit(flash_surface, (0, 0))
-                    # Update the display to show the changes
+                # Update the display to show the changes
                     pygame.display.update()
-                    # Control the frame rate
+                # Control the frame rate
                     self.clock.tick(FPS)
 
     # Draw elements on the screen
     def draw(self):
-        # Fill the screen with white color
+    # Fill the screen with white color
         self.screen.fill((255, 255, 255))
-        # Draw background image
+    # Draw background image
         self.screen.blit(BGCOLOR, (0, 0))
-        # Draw score and high score text on the screen
+    # Draw score and high score text on the screen
         UIElement(170, 20, f"Score: {str(self.score)}").draw(self.screen)
         UIElement(370, 20, f"High score: {str(self.high_score)}").draw(self.screen)
-        # Draw buttons on the screen
-        for button in self.buttons:
+    # Draw buttons on the screen
+        for button in self.buttons :
             button.draw(self.screen)
-        # Update the display
+    # Update the display
         pygame.display.update()
 
 # Handle events such as mouse clicks and quitting the game
     def events(self):
         # Loop through all events
-        for event in pygame.event.get():
+        for event in pygame.event.get() :
             # If the quit event is triggered
             if event.type == pygame.QUIT:
                 # Quit the pygame module
@@ -254,14 +254,13 @@ class Game:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 # Loop through all buttons
                 for button in self.buttons:
-                    # If the clicked position is within the button's area
+                # If the clicked position is within the button's area
                     if button.clicked(mouse_x, mouse_y):
-                        # Set the clicked_button attribute to the color of the clicked button
+                # Set the clicked_button attribute to the color of the clicked button
                         self.clicked_button = button.colour
 
 # Initialize the game
 game = Game()
-
 # Main game loop
 while True:
 
