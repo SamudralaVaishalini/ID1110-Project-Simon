@@ -26,11 +26,6 @@ ANIMATION_SPEED = 20
 # Load background image
 BGCOLOR = pygame.image.load('ocean.jpg')
 
-
-
-
-
-
 class Button:
     # Initialize the Button object
     def __init__(self, x, y, colour):
@@ -44,8 +39,6 @@ class Button:
     # Check if the button is clicked
     def clicked(self, mouse_x, mouse_y):
         return self.x <= mouse_x <= self.x + BUTTON_SIZE and self.y <= mouse_y <= self.y + BUTTON_SIZE
-
-
 
 # Define the UIElement class
 class UIElement:
