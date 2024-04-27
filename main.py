@@ -52,3 +52,48 @@ class UIElement:
         font = pygame.font.Font("moto-verse.ttf", 16)  # Load a font for rendering text
         text = font.render(self.text, True, BLACK)     # Render the text with the font and color
         screen.blit(text, (self.x, self.y))            # Blit the text onto the screen at the specified position
+class Game:
+    # Initialize the game
+    def __init__(self):
+        pygame.init()  # Initialize pygame
+        # Set window dimensions
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        # Load game icon
+        icon = pygame.image.load("simon.png")
+        # Set game icon
+        pygame.display.set_icon(icon)
+        # Set game title
+        pygame.display.set_caption(TITLE)
+        # Create a clock object to control frame rate
+        self.clock = pygame.time.Clock()
+
+        # Define color schemes for button animations
+        self.flash_colours = [PINK, YELLOW, GREEN, VIOLET]
+        self.colours = [DARKPINK, DARKYELLOW, DARKGREEN, DARKVIOLET]
+
+        # Define positions and colors for the buttons
+        self.buttons = [
+            Button(165, 90, DARKPINK),
+            Button(385, 90, DARKYELLOW),
+            Button(165, 310, DARKGREEN),
+            Button(385, 310, DARKVIOLET),
+        ]
+
+    # Get the high score from a file
+    def get_high_score(self):
+        with open("high_score.txt", "r") as file:
+            # Read the high score
+            score = file.read()
+        # Return the high score as an integer
+        return int(score)
+
+    # Save the high score to a file
+    def save_score(self):
+        with open("high_score.txt", "w") as file:
+            if self.score > self.high_score:
+                # If current score is higher than high score, write current score to file
+                file.write(str(self.score))
+
+            else:
+                # Otherwise, write high score to file
+                file.write(str(self.high_score))
