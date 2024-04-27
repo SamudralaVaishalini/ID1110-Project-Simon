@@ -115,3 +115,87 @@ class Game:
         over_text = over_font.render('GAME OVER', True, (0, 0, 0))
         # Draw "Game Over" text on the screen
         self.screen.blit(over_text, (80, 200))
+
+    # Run the game loop
+    def run(self):
+        # Set playing flag to True
+        self.playing = True
+        # Main game loop
+        while self.playing:
+            # Control frame rate
+            self.clock.tick(FPS)
+            # Reset clicked button
+            self.clicked_button = None
+            # Handle events
+            self.events()
+            # Draw game elements
+            self.draw()
+            # Update game state
+            self.update()
+
+    # Update game state
+    def update(self):
+        # If waiting for input
+        if not self.waiting_input:
+            # Wait for a short duration
+            pygame.time.wait(1000)
+            # Add a new color to the pattern and display it
+            self.pattern.append(random.choice(self.colours))
+
+            for button in self.pattern:
+                self.button_animation(button)
+                pygame.time.wait(200)
+            # Now waiting for player input
+            self.waiting_input = True
+        else:
+            # Check if player input matches the pattern
+            if self.clicked_button and self.clicked_button == self.pattern[self.current_step]:
+                # If correct button clicked, move to the next step
+                self.button_animation(self.clicked_button)
+                self.current_step += 1
+                # If pattern completed, increase score and reset variables
+                if self.current_step == len(self.pattern):
+                    self.score += 1
+                    self.waiting_input = False
+                    self.current_step = 0
+
+            # If wrong button clicked, end the game
+            elif self.clicked_button and self.clicked_button != self.pattern[self.current_step]:
+                self.game_over_text()
+                self.game_over_animation()
+                self.save_score()
+                self.playing = False
+
+    # Animate the button flash
+    def button_animation(self, colour):
+        # Loop through the colors and buttons to find the matching color
+        for i in range(len(self.colours)):
+            if self.colours[i] == colour:
+                # Assign the flash color and corresponding button
+                flash_colour = self.flash_colours[i]
+                button = self.buttons[i]
+
+        # Copy the original screen to avoid modifying it directly
+        original_surface = self.screen.copy()
+        # Create a surface for the flash effect with transparency
+        flash_surface = pygame.Surface((BUTTON_SIZE, BUTTON_SIZE))
+        flash_surface = flash_surface.convert_alpha()
+        r, g, b = flash_colour  # Get the RGB components of the flash color
+
+        # Loop through the animation steps for increasing and decreasing alpha
+        for start, end, step in ((0, 255, 1), (255, 0, -1)):
+            # Loop through alpha values within the range with the given step
+            for alpha in range(start, end, ANIMATION_SPEED * step):
+                # Copy the original screen to reset it for the next frame
+                self.screen.blit(original_surface, (0, 0))
+                # Fill the flash surface with the flash color and current alpha
+                flash_surface.fill((r, g, b, alpha))
+                # Blit the flash surface onto the screen at the button's position
+                self.screen.blit(flash_surface, (button.x, button.y))
+                # Update the display to show the changes
+                pygame.display.update()
+                # Control the frame rate
+                self.clock.tick(FPS)
+        # After the animation is complete, restore the original screen
+        self.screen.blit(original_surface, (0, 0))
+
