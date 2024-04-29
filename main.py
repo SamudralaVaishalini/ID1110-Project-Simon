@@ -174,7 +174,7 @@ class Game:
         # Draw elements on the screen
     def draw(self):
     # Draw background image
-        self.screen.blit(BGIMAGE, (0, 0))
+        self.screen.blit(BGIMAGE)
     # Draw score and high score text on the screen
         UIElement(170, 20, f"Score: {str(self.score)}").draw(self.screen)
         UIElement(370, 20, f"High score: {str(self.high_score)}").draw(self.screen)
