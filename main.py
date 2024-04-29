@@ -23,7 +23,7 @@ BUTTON_SIZE = 200
 ANIMATION_SPEED = 20
 
 # Load background image
-BGCOLOR = pygame.image.load('ocean.jpg')
+BGIMAGE = pygame.image.load('ocean.jpg')
 
 class Button:
     # Initialize the Button object
@@ -174,7 +174,7 @@ class Game:
         # Draw elements on the screen
     def draw(self):
     # Draw background image
-        self.screen.blit(BGCOLOR, (0, 0))
+        self.screen.blit(BGIMAGE, (0, 0))
     # Draw score and high score text on the screen
         UIElement(170, 20, f"Score: {str(self.score)}").draw(self.screen)
         UIElement(370, 20, f"High score: {str(self.high_score)}").draw(self.screen)
