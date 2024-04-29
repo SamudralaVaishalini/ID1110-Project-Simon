@@ -2,6 +2,7 @@ import pygame
 import random
 
 # COLORS (r, g, b)
+# Define various colours using RGB values
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 DARKGREY = (40, 40, 40)
