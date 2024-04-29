@@ -221,8 +221,6 @@ class Game:
 
     # Draw elements on the screen
     def draw(self):
-    # Fill the screen with white color
-        self.screen.fill((255, 255, 255))
     # Draw background image
         self.screen.blit(BGCOLOR, (0, 0))
     # Draw score and high score text on the screen
