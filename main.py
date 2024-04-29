@@ -112,24 +112,7 @@ class Game:
         # Draw "Game Over" text on the screen
         self.screen.blit(over_text, (80, 200))
 
-    # Run the game loop
-    def run(self):
-        # Set playing flag to True
-        self.playing = True
-        # Main game loop
-        while self.playing:
-            # Control frame rate
-            self.clock.tick(FPS)
-            # Reset clicked button
-            self.clicked_button = None
-            # Handle events
-            self.events()
-            # Draw game elements
-            self.draw()
-            # Update game state
-            self.update()
-
-    # Update game state
+        # Update game state
     def update(self):
         # If waiting for input
         if not self.waiting_input:
@@ -252,6 +235,22 @@ class Game:
                     if button.clicked(mouse_x, mouse_y):
                 # Set the clicked_button attribute to the color of the clicked button
                         self.clicked_button = button.colour
+    # Run the game loop
+    def run(self):
+        # Set playing flag to True
+        self.playing = True
+        # Main game loop
+        while self.playing:
+            # Control frame rate
+            self.clock.tick(FPS)
+            # Reset clicked button
+            self.clicked_button = None
+            # Handle events
+            self.events()
+            # Draw game elements
+            self.draw()
+            # Update game state
+            self.update()
 
 # Initialize the game
 game = Game()
