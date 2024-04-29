@@ -75,26 +75,7 @@ class Game:
             Button(385, 310, DARKVIOLET),
         ]
 
-    # Get the high score from a file
-    def get_high_score(self):
-        with open("high_score.txt", "r") as file:
-            # Read the high score
-            score = file.read()
-        # Return the high score as an integer
-        return int(score)
-
-    # Save the high score to a file
-    def save_score(self):
-        with open("high_score.txt", "w") as file:
-            if self.score > self.high_score :
-                # If current score is higher than high score, write current score to file
-                file.write(str(self.score))
-
-            else:
-                # Otherwise, write high score to file
-                file.write(str(self.high_score))
-                
-    # Reset game variables for a new game
+        # Reset game variables for a new game
     def new(self):
         # Initialize game variables
         self.waiting_input = False
@@ -103,14 +84,6 @@ class Game:
         self.score = 0
         # Get the high score
         self.high_score = self.get_high_score()
-      # Display "Game Over" text on the screen
-    def game_over_text(self):
-        # Load font for "Game Over" text
-        over_font = pygame.font.Font('INFECTED.ttf', 150)
-        # Render "Game Over" text
-        over_text = over_font.render('GAME OVER', True, (0, 0, 0))
-        # Draw "Game Over" text on the screen
-        self.screen.blit(over_text, (80, 200))
 
         # Update game state
     def update(self):
@@ -145,7 +118,7 @@ class Game:
                 self.save_score()
                 self.playing = False
 
-    # Animate the button flash
+        # Animate the button flash
     def button_animation(self, colour):
         # Loop through the colors and buttons to find the matching color
         for i in range(len(self.colours)):
@@ -177,7 +150,55 @@ class Game:
                 self.clock.tick(FPS)
     # After the animation is complete, restore the original screen
         self.screen.blit(original_surface, (0, 0))
-    # Animate the screen flash when game over
+   
+
+    # Get the high score from a file
+    def get_high_score(self):
+        with open("high_score.txt", "r") as file:
+            # Read the high score
+            score = file.read()
+        # Return the high score as an integer
+        return int(score)
+
+    # Save the high score to a file
+    def save_score(self):
+        with open("high_score.txt", "w") as file:
+            if self.score > self.high_score :
+                # If current score is higher than high score, write current score to file
+                file.write(str(self.score))
+
+            else:
+                # Otherwise, write high score to file
+                file.write(str(self.high_score))
+
+        # Draw elements on the screen
+    def draw(self):
+    # Draw background image
+        self.screen.blit(BGCOLOR, (0, 0))
+    # Draw score and high score text on the screen
+        UIElement(170, 20, f"Score: {str(self.score)}").draw(self.screen)
+        UIElement(370, 20, f"High score: {str(self.high_score)}").draw(self.screen)
+    # Draw buttons on the screen
+        for button in self.buttons :
+            button.draw(self.screen)
+    # Update the display
+        pygame.display.update()
+
+    
+                
+
+      # Display "Game Over" text on the screen
+    def game_over_text(self):
+        # Load font for "Game Over" text
+        over_font = pygame.font.Font('INFECTED.ttf', 150)
+        # Render "Game Over" text
+        over_text = over_font.render('GAME OVER', True, (0, 0, 0))
+        # Draw "Game Over" text on the screen
+        self.screen.blit(over_text, (80, 200))
+
+
+
+ # Animate the screen flash when game over
     def game_over_animation(self):
         # Copy the original screen to avoid modifying it directly
         original_surface = self.screen.copy()
@@ -202,18 +223,7 @@ class Game:
                 # Control the frame rate
                     self.clock.tick(FPS)
 
-    # Draw elements on the screen
-    def draw(self):
-    # Draw background image
-        self.screen.blit(BGCOLOR, (0, 0))
-    # Draw score and high score text on the screen
-        UIElement(170, 20, f"Score: {str(self.score)}").draw(self.screen)
-        UIElement(370, 20, f"High score: {str(self.high_score)}").draw(self.screen)
-    # Draw buttons on the screen
-        for button in self.buttons :
-            button.draw(self.screen)
-    # Update the display
-        pygame.display.update()
+
 
 # Handle events such as mouse clicks and quitting the game
     def events(self):
