@@ -5,8 +5,6 @@ import random
 # Define various colours using RGB values
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-DARKGREY = (40, 40, 40)
-LIGHTGREY = (100, 100, 100)
 PINK=(172, 39, 108)
 DARKPINK=(245, 2, 128)
 YELLOW=(249, 248, 113)
