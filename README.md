@@ -18,6 +18,7 @@ The Simon Game is a classic memory game where players must replicate a sequence 
 2.POLISETTI DATTA PRIYA
 <br>
 3.KEDIKA VARSHITHA REDDY
+<br>
+#
 
-# Deployment
 To run the game, open the complete "ID1110-Project-Simon" folder and then run the "main.py" file.
